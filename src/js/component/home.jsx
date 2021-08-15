@@ -1,24 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import Light from "./light.jsx";
+import PropTypes from "prop-types";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
+	const [trafficLight, setTrafficLight] = useState({
+		redLight: "bg-danger",
+		orangeLight: "bg-warning",
+		greenLight: "bg-success"
+	});
+
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="box container border border-dark d-flex flex-column">
+			<Light
+				state={trafficLight.redLight}
+				clickChange={() => {
+					setTrafficLight({
+						redLight: "bg-danger glow",
+						orangeLight: "bg-warning",
+						greenLight: "bg-success"
+					});
+				}}
+			/>
+			<Light
+				state={trafficLight.orangeLight}
+				clickChange={() => {
+					setTrafficLight({
+						redLight: "bg-danger",
+						orangeLight: "bg-warning glow",
+						greenLight: "bg-success"
+					});
+				}}
+			/>
+			<Light
+				state={trafficLight.greenLight}
+				clickChange={() => {
+					setTrafficLight({
+						redLight: "bg-danger",
+						orangeLight: "bg-warning",
+						greenLight: "bg-success glow "
+					});
+				}}
+			/>
 		</div>
 	);
 };
